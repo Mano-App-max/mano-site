@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MANO — Panel del profesional</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root {
+  --navy: #0d1f3c;
+  --navy2: #162d52;
+  --blue: #2a5bd7;
+  --blue-light: #e8eefb;
+  --cream: #f5f3ef;
+  --cream2: #ede9e2;
+  --border: #e2ddd6;
+  --text: #0d1f3c;
+  --text2: #6b6560;
+  --text3: #9e9890;
+  --white: #ffffff;
+  --green: #1a7a4a;
+  --green-light: #e4f4ec;
+  --red: #c0392b;
+  --red-light: #fdecea;
+  --amber: #a05c00;
+  --amber-light: #fdf0dc;
+  --radius: 10px;
+  --radius-lg: 16px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Instrument Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  background: var(--navy);
+  padding: 0 2rem;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.04em;
+  color: var(--white);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--blue); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-user {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+}
+
+.nav-avatar {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-logout {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Instrument Sans', sans-serif;
+  transition: color 0.15s;
+}
+.btn-logout:hover { color: rgba(255,255,255,0.8); }
+
+.main {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 560px;
+  overflow: hidden;
+}
+
+/* AUTH SCREENS */
+.auth-wrap {
+  padding: 2.5rem 2rem;
+}
+
+.auth-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--navy);
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+
+.auth-sub {
+  font-size: 13.5px;
+  color: var(--text2);
+  margin-bottom: 1.75rem;
+  line-height: 1.6;
+}
+
+.auth-switch {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 13px;
+  color: var(--text3);
+}
+
+.auth-switch a {
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-switch a:hover { text-decoration: underline; }
+
+.field { margin-bottom: 14px; }
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+
+.field input, .field select, .field textarea {
+  width: 100%;
+  padding: 10px 13px;
+  font-size: 13.5px;
+  font-family: 'Instrument Sans', sans-serif;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--cream);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--blue);
+  background: var(--white);
+}
+
+.field input::placeholder, .field textarea::placeholder { color: var(--text3); }
+.field textarea { resize: none; height: 80px; line-height: 1.6; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.btn-full {
+  width: 100%;
+  padding: 12px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: -0.01em;
+  margin-top: 4px;
+}
+.btn-full:active { transform: scale(0.99); }
+.btn-primary-full { background: var(--navy); color: white; }
+.btn-primary-full:hover { background: var(--blue); }
+.btn-primary-full:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.alert {
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  margin-bottom: 14px;
+  line-height: 1.5;
+  display: none;
+}
+.alert-error { background: var(--red-light); color: var(--red); }
+.alert-success { background: var(--green-light); color: var(--green); }
+.alert.show { display: block; }
+
+.divider-text {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 1rem 0;
+  font-size: 12px;
+  color: var(--text3);
+}
+.divider-text::before, .divider-text::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* STEPPER */
+.stepper {
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+}
+
+.step-circle {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  transition: all 0.25s;
+}
+
+.step-circle.done { background: var(--navy); color: white; }
+.step-circle.active { background: var(--blue); color: white; }
+.step-circle.pending { background: var(--cream2); color: var(--text3); }
+
+.step-label {
+  font-size: 9px;
+  color: var(--text3);
+  text-align: center;
+  line-height: 1.3;
+  white-space: pre-line;
+}
+.step-label.active { color: var(--navy); font-weight: 500; }
+
+.step-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 20px;
+  transition: background 0.25s;
+}
+.step-line.done { background: var(--navy); }
+
+/* WIZARD BODY */
+.card-body {
+  padding: 2rem;
+  min-height: 360px;
+}
+
+.step-heading {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--navy);
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+
+.step-desc {
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.hint {
+  font-size: 12px;
+  color: #185FA5;
+  line-height: 1.6;
+  background: var(--blue-light);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  margin-bottom: 14px;
+}
+
+.tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.tag {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 99px;
+  border: 1.5px solid var(--border);
+  background: var(--cream);
+  color: var(--text2);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'Instrument Sans', sans-serif;
+  user-select: none;
+}
+.tag:hover { border-color: var(--blue); color: var(--blue); }
+.tag.active { background: var(--navy); border-color: var(--navy); color: white; }
+
+.upload-box {
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  text-align: center;
+  cursor: pointer;
+  background: var(--cream);
+  transition: all 0.15s;
+  position: relative;
+}
+.upload-box:hover { border-color: var(--blue); background: var(--blue-light); }
+.upload-box.uploaded { border-color: var(--green); background: var(--green-light); border-style: solid; }
+.upload-icon { font-size: 22px; margin-bottom: 6px; }
+.upload-text { font-size: 13px; color: var(--text2); font-weight: 500; }
+.upload-sub { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.upload-box input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+.upload-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.upload-thumb {
+  aspect-ratio: 1;
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-size: 11px;
+  color: var(--text3);
+  gap: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.upload-thumb:hover { border-color: var(--blue); background: var(--blue-light); color: var(--blue); }
+.upload-thumb.uploaded { border-color: var(--green); border-style: solid; }
+.upload-thumb input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.upload-thumb-icon { font-size: 18px; }
+.upload-thumb img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; border-radius: 8px; }
+
+.divider { height: 1px; background: var(--border); margin: 1rem 0; }
+
+/* FOOTER */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-top: 1px solid var(--border);
+  background: var(--cream);
+}
+
+.btn {
+  font-size: 13.5px;
+  font-weight: 500;
+  font-family: 'Instrument Sans', sans-serif;
+  padding: 10px 22px;
+  border-radius: 99px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn-primary { background: var(--navy); color: white; }
+.btn-primary:hover:not(:disabled) { background: var(--blue); }
+.btn-secondary { background: var(--cream2); color: var(--text2); }
+.btn-secondary:hover { background: var(--border); }
+
+.step-counter {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: 'DM Mono', monospace;
+}
+
+/* SUCCESS */
+.success-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 0 0.5rem;
+}
+
+.success-icon {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: var(--green-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-bottom: 1.25rem;
+}
+
+.success-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.success-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.7;
+  max-width: 380px;
+  margin-bottom: 1.5rem;
+}
+
+.status-card {
+  width: 100%;
+  background: var(--amber-light);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.status-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--amber);
+  flex-shrink: 0;
+}
+
+.status-label { font-size: 13px; font-weight: 500; color: var(--navy); }
+.status-sub { font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+/* VERIFY EMAIL SCREEN */
+.verify-wrap {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.verify-icon {
+  font-size: 40px;
+  margin-bottom: 1rem;
+}
+
+.verify-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.verify-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 480px) {
+  .field-row { grid-template-columns: 1fr; }
+  .upload-grid { grid-template-columns: repeat(2, 1fr); }
+  .card-body { padding: 1.25rem; }
+  .stepper { padding: 1rem; }
+  .card-footer { padding: 1rem; }
+  .auth-wrap { padding: 1.75rem 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">MANO<span>.</span></a>
+  <div class="nav-right" id="nav-right" style="display:none;">
+    <span class="nav-user" id="nav-email"></span>
+    <button class="btn-logout" onclick="logout()">Salir</button>
+  </div>
+</nav>
+
+<div class="main">
+  <div class="card" id="app"></div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://dellkeptqoribzupitwj.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRlbGxrZXB0cW9yaWJ6dXBpdHdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwODIxMjcsImV4cCI6MjA5MTY1ODEyN30.0IRk4GN0Exyse6Lg5Sy-TZLNVSQfYs_bTaW5HQuk4bU';
+
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+const BARRIOS = ["Palermo","Recoleta","Belgrano","Caballito","Almagro","Flores","Núñez","Villa Urquiza","Colegiales","San Telmo","Balvanera","Boedo","Toda CABA"];
+const STEPS = [
+  { label: "Datos\npersonales" },
+  { label: "Verificación\nde identidad" },
+  { label: "Perfil\nprofesional" },
+  { label: "Trabajos\nanteriores" }
+];
+
+let currentStep = 0;
+let selectedBarrios = new Set();
+let uploadedFiles = {};
+let currentUser = null;
+let existingProfile = null;
+
+const app = document.getElementById('app');
+
+async function init() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) {
+    currentUser = session.user;
+    showNavUser(session.user.email);
+    const userRol = session.user.user_metadata?.rol || 'profesional';
+    if (userRol === 'cliente') {
+      renderClienteDashboard();
+    } else {
+      const { data } = await sb.from('profesionales').select('*').eq('user_id', session.user.id).single();
+      existingProfile = data;
+      if (existingProfile && existingProfile.estado === 'enviado') {
+        renderSuccess();
+      } else {
+        renderWizard();
+      }
+    }
+  } else {
+    renderLogin();
+  }
+
+  sb.auth.onAuthStateChange(async (event, session) => {
+    if (event === 'SIGNED_IN' && session) {
+      currentUser = session.user;
+      showNavUser(session.user.email);
+      const userRol = session.user.user_metadata?.rol || 'profesional';
+      if (userRol === 'cliente') {
+        renderClienteDashboard();
+      } else {
+        const { data } = await sb.from('profesionales').select('*').eq('user_id', session.user.id).single();
+        existingProfile = data;
+        renderWizard();
+      }
+    } else if (event === 'SIGNED_OUT') {
+      currentUser = null;
+      document.getElementById('nav-right').style.display = 'none';
+      renderLogin();
+    }
+  });
+}
+
+function showNavUser(email) {
+  document.getElementById('nav-right').style.display = 'flex';
+  document.getElementById('nav-email').textContent = email;
+}
+
+async function logout() {
+  await sb.auth.signOut();
+}
+
+let rolElegido = null;
+
+function renderForgotPassword() {
+  app.innerHTML = `
+    <div class="auth-wrap">
+      <div class="auth-title">Recuperar contraseña</div>
+      <div class="auth-sub">Te mandamos un link a tu mail para crear una nueva contraseña.</div>
+      <div class="alert alert-error" id="forgot-error"></div>
+      <div class="alert alert-success" id="forgot-success"></div>
+      <div class="field"><label>Email</label><input type="email" id="forgot-email" placeholder="tucorreo@gmail.com" /></div>
+      <button class="btn-full btn-primary-full" onclick="doForgotPassword()" id="forgot-btn">Enviar link</button>
+      <div class="auth-switch"><a href="#" onclick="renderLogin();return false;">← Volver al login</a></div>
+    </div>
+  `;
+}
+
+async function doForgotPassword() {
+  const email = document.getElementById('forgot-email').value.trim();
+  const btn = document.getElementById('forgot-btn');
+  const err = document.getElementById('forgot-error');
+  const ok = document.getElementById('forgot-success');
+
+  if (!email) { showAlert(err, 'Ingresá tu email.'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  const { error } = await sb.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://mano-profesionales.netlify.app/panel.html'
+  });
+
+  if (error) {
+    showAlert(err, 'No se pudo enviar el mail. Verificá el email ingresado.');
+    btn.disabled = false;
+    btn.textContent = 'Enviar link';
+  } else {
+    ok.textContent = '¡Mail enviado! Revisá tu casilla y seguí el link.';
+    ok.classList.add('show');
+    btn.textContent = 'Enviado ✓';
+  }
+}
+
+function renderLogin() {
+  app.innerHTML = `
+    <div class="auth-wrap">
+      <div class="auth-title">Ingresá a tu panel</div>
+      <div class="auth-sub">Bienvenido de nuevo a MANO.</div>
+      <div class="alert alert-error" id="login-error"></div>
+      <div class="alert alert-success" id="login-success"></div>
+      <div class="field"><label>Email</label><input type="email" id="login-email" placeholder="tucorreo@gmail.com" /></div>
+      <div class="field"><label>Contraseña</label><input type="password" id="login-pass" placeholder="Tu contraseña" onkeydown="if(event.key==='Enter')doLogin()" /></div>
+      <button class="btn-full btn-primary-full" onclick="doLogin()" id="login-btn">Ingresar</button>
+      <div style="text-align:center;margin-top:10px;"><a href="#" onclick="renderForgotPassword();return false;" style="font-size:12px;color:var(--text3);text-decoration:none;">¿Olvidaste tu contraseña?</a></div>
+      <div class="divider-text">o</div>
+      <div class="auth-switch">¿No tenés cuenta? <a href="#" onclick="renderRolSelector();return false;">Creá una acá</a></div>
+    </div>
+  `;
+}
+
+function renderRolSelector() {
+  rolElegido = null;
+  app.innerHTML = `
+    <div class="auth-wrap">
+      <div class="auth-title">¿Cómo querés usar MANO?</div>
+      <div class="auth-sub">Elegí tu rol para crear tu cuenta.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.25rem;">
+        <div id="rol-cliente" onclick="elegirRol('cliente')" style="border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;cursor:pointer;transition:all 0.15s;">
+          <div style="width:40px;height:40px;border-radius:10px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;">🏠</div>
+          <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px;">Necesito un profesional</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.5;">Publicá solicitudes y recibí presupuestos.</div>
+        </div>
+        <div id="rol-profesional" onclick="elegirRol('profesional')" style="border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;cursor:pointer;transition:all 0.15s;">
+          <div style="width:40px;height:40px;border-radius:10px;background:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;">🔧</div>
+          <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px;">Soy profesional</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.5;">Ofrecé tus servicios en CABA.</div>
+        </div>
+      </div>
+      <button class="btn-full btn-primary-full" id="btn-rol" onclick="renderRegister()" style="opacity:0.4;pointer-events:none;">Continuar →</button>
+      <div class="auth-switch" style="margin-top:1rem;">¿Ya tenés cuenta? <a href="#" onclick="renderLogin();return false;">Ingresá acá</a></div>
+    </div>
+  `;
+}
+
+function elegirRol(rol) {
+  rolElegido = rol;
+  const cliente = document.getElementById('rol-cliente');
+  const profesional = document.getElementById('rol-profesional');
+  const btn = document.getElementById('btn-rol');
+  cliente.style.borderColor = rol === 'cliente' ? '#0d1f3c' : '#e2ddd6';
+  cliente.style.borderWidth = rol === 'cliente' ? '2px' : '1.5px';
+  profesional.style.borderColor = rol === 'profesional' ? '#0d1f3c' : '#e2ddd6';
+  profesional.style.borderWidth = rol === 'profesional' ? '2px' : '1.5px';
+  btn.style.opacity = '1';
+  btn.style.pointerEvents = 'all';
+}
+
+function renderRegister() {
+  if (!rolElegido) { renderRolSelector(); return; }
+  const esCliente = rolElegido === 'cliente';
+  app.innerHTML = `
+    <div class="auth-wrap">
+      <div style="display:inline-flex;align-items:center;gap:6px;background:${esCliente ? 'var(--blue-light)' : 'var(--green-light)'};color:${esCliente ? '#185FA5' : 'var(--green)'};font-size:11px;font-weight:500;padding:4px 12px;border-radius:99px;margin-bottom:1rem;">
+        ${esCliente ? '🏠 Cuenta de cliente' : '🔧 Cuenta de profesional'}
+      </div>
+      <div class="auth-title">${esCliente ? 'Creá tu cuenta' : 'Creá tu cuenta'}</div>
+      <div class="auth-sub">${esCliente ? 'En 2 minutos podés publicar tu primera solicitud.' : 'Después completás tu perfil de verificación en 4 pasos.'}</div>
+      <div class="alert alert-error" id="reg-error"></div>
+      ${esCliente ? `
+        <div class="field-row">
+          <div class="field"><label>Nombre</label><input type="text" id="reg-nombre" placeholder="Tu nombre" /></div>
+          <div class="field"><label>Apellido</label><input type="text" id="reg-apellido" placeholder="Tu apellido" /></div>
+        </div>
+      ` : ''}
+      <div class="field"><label>Email</label><input type="email" id="reg-email" placeholder="tucorreo@gmail.com" /></div>
+      <div class="field"><label>Contraseña</label><input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres" /></div>
+      <div class="field"><label>Confirmar contraseña</label><input type="password" id="reg-pass2" placeholder="Repetí tu contraseña" /></div>
+      ${esCliente ? `
+        <div class="field">
+          <label>Barrio</label>
+          <select id="reg-barrio" style="width:100%;padding:10px 13px;font-size:13.5px;border:1.5px solid var(--border);border-radius:var(--radius);background:var(--cream);color:var(--text);appearance:none;font-family:inherit;">
+            <option value="" disabled selected>Seleccioná tu barrio</option>
+            ${["Palermo","Recoleta","Belgrano","Caballito","Almagro","Flores","Núñez","Villa Urquiza","Colegiales","San Telmo","Toda CABA"].map(b=>`<option>${b}</option>`).join('')}
+          </select>
+        </div>
+        <div class="field"><label>Teléfono / WhatsApp</label><input type="tel" id="reg-tel" placeholder="11 1234-5678" /></div>
+      ` : ''}
+      <button class="btn-full btn-primary-full" onclick="doRegister()" id="reg-btn" style="background:${esCliente ? 'var(--navy)' : 'var(--green)'}">Crear cuenta →</button>
+      <div class="auth-switch">¿Ya tenés cuenta? <a href="#" onclick="renderLogin();return false;">Ingresá acá</a> · <a href="#" onclick="renderRolSelector();return false;">Cambiar rol</a></div>
+    </div>
+  `;
+}
+
+function renderVerifyEmail(email) {
+  app.innerHTML = `
+    <div class="verify-wrap">
+      <div class="verify-icon">📧</div>
+      <div class="verify-title">Verificá tu email</div>
+      <div class="verify-desc">Te mandamos un mail a <strong>${email}</strong>. Hacé clic en el link para confirmar tu cuenta y después volvé acá.</div>
+      <button class="btn-full btn-primary-full" onclick="renderLogin()">Ya verifiqué, ingresar</button>
+    </div>
+  `;
+}
+
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  const btn = document.getElementById('login-btn');
+  const err = document.getElementById('login-error');
+
+  if (!email || !pass) { showAlert(err, 'Completá email y contraseña.'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Ingresando...';
+
+  const { error } = await sb.auth.signInWithPassword({ email, password: pass });
+
+  if (error) {
+    showAlert(err, 'Email o contraseña incorrectos.');
+    btn.disabled = false;
+    btn.textContent = 'Ingresar';
+  }
+}
+
+async function doRegister() {
+  const email = document.getElementById('reg-email').value.trim();
+  const pass = document.getElementById('reg-pass').value;
+  const pass2 = document.getElementById('reg-pass2').value;
+  const btn = document.getElementById('reg-btn');
+  const err = document.getElementById('reg-error');
+
+  if (!email || !pass) { showAlert(err, 'Completá todos los campos.'); return; }
+  if (pass !== pass2) { showAlert(err, 'Las contraseñas no coinciden.'); return; }
+  if (pass.length < 6) { showAlert(err, 'La contraseña debe tener al menos 6 caracteres.'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Creando cuenta...';
+
+  const { data, error } = await sb.auth.signUp({ 
+    email, 
+    password: pass, 
+    options: { 
+      emailRedirectTo: 'https://mano-profesionales.netlify.app/panel.html',
+      data: { rol: rolElegido }
+    } 
+  });
+
+  if (error) {
+    showAlert(err, error.message);
+    btn.disabled = false;
+    btn.textContent = 'Crear cuenta →';
+  } else {
+    if (rolElegido === 'cliente' && data.user) {
+      const nombre = document.getElementById('reg-nombre')?.value.trim() || '';
+      const apellido = document.getElementById('reg-apellido')?.value.trim() || '';
+      const telefono = document.getElementById('reg-tel')?.value.trim() || '';
+      const barrio = document.getElementById('reg-barrio')?.value || '';
+      await sb.from('clientes').insert({ user_id: data.user.id, nombre, apellido, telefono, barrio });
+    }
+    renderVerifyEmail(email);
+  }
+}
+
+function showAlert(el, msg) {
+  el.textContent = msg;
+  el.classList.add('show');
+}
+
+function renderStepper() {
+  return STEPS.map((s, i) => {
+    const state = i < currentStep ? 'done' : i === currentStep ? 'active' : 'pending';
+    const num = i < currentStep ? '✓' : i + 1;
+    const line = i < STEPS.length - 1 ? `<div class="step-line ${i < currentStep ? 'done' : ''}"></div>` : '';
+    return `
+      <div class="step-item">
+        <div class="step-circle ${state}">${num}</div>
+        <div class="step-label ${state === 'active' ? 'active' : ''}">${s.label}</div>
+      </div>${line}
+    `;
+  }).join('');
+}
+
+function renderClienteDashboard() {
+  app.innerHTML = `
+    <div class="card-body" style="text-align:center;padding:3rem 2rem;">
+      <div style="width:64px;height:64px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 1.25rem;">🏠</div>
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:20px;color:var(--navy);margin-bottom:8px;letter-spacing:-0.02em;">¡Bienvenido a MANO!</div>
+      <div style="font-size:14px;color:var(--text2);line-height:1.7;max-width:380px;margin:0 auto 2rem;">Tu cuenta de cliente está lista. Pronto vas a poder publicar solicitudes y recibir presupuestos de profesionales verificados en CABA.</div>
+      <div style="background:var(--amber-light);border-radius:var(--radius);border:1px solid var(--border);padding:1rem 1.25rem;display:flex;align-items:center;gap:12px;text-align:left;max-width:400px;margin:0 auto;">
+        <div style="width:10px;height:10px;border-radius:50%;background:var(--amber);flex-shrink:0;"></div>
+        <div>
+          <div style="font-size:13px;font-weight:500;color:var(--navy);">Plataforma en construcción</div>
+          <div style="font-size:12px;color:var(--text3);margin-top:2px;">Te avisamos cuando podás empezar a publicar solicitudes.</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderWizard() {
+  const pre = existingProfile || {};
+  app.innerHTML = `
+    <div class="stepper" id="stepper">${renderStepper()}</div>
+    <div class="card-body" id="wizard-body"></div>
+    <div class="card-footer">
+      <button class="btn btn-secondary" id="btn-back" onclick="prevStep()">Atrás</button>
+      <span class="step-counter" id="step-counter">Paso 1 de 4</span>
+      <button class="btn btn-primary" id="btn-next" onclick="nextStep()">Continuar →</button>
+    </div>
+  `;
+  renderStep();
+}
+
+function renderStep() {
+  document.getElementById('stepper').innerHTML = renderStepper();
+  document.getElementById('step-counter').textContent = `Paso ${currentStep + 1} de ${STEPS.length}`;
+  document.getElementById('btn-back').style.visibility = currentStep === 0 ? 'hidden' : 'visible';
+  document.getElementById('btn-next').textContent = currentStep === STEPS.length - 1 ? 'Enviar para revisión' : 'Continuar →';
+
+  const pre = existingProfile || {};
+  const bodies = [
+    // PASO 1
+    `<div class="step-heading">Datos personales</div>
+     <div class="step-desc">Tu información básica para que los clientes puedan conocerte.</div>
+     <div class="field-row">
+       <div class="field"><label>Nombre</label><input type="text" id="f-nombre" value="${pre.nombre||''}" placeholder="Tu nombre" /></div>
+       <div class="field"><label>Apellido</label><input type="text" id="f-apellido" value="${pre.apellido||''}" placeholder="Tu apellido" /></div>
+     </div>
+     <div class="field"><label>Teléfono / WhatsApp</label><input type="tel" id="f-telefono" value="${pre.telefono||''}" placeholder="11 1234-5678" /></div>
+     <div class="field"><label>Fecha de nacimiento</label><input type="date" id="f-fecha" value="${pre.fecha_nacimiento||''}" /></div>
+     <div class="field">
+       <label>Barrios donde trabajás</label>
+       <div class="tags-wrap" id="tags-wrap"></div>
+     </div>`,
+
+    // PASO 2
+    `<div class="step-heading">Verificación de identidad</div>
+     <div class="step-desc">Necesitamos verificar tu identidad para garantizar la seguridad de los clientes.</div>
+     <div class="hint">Las fotos se guardan de forma segura y solo son vistas por el equipo de MANO.</div>
+     <div class="field">
+       <label>DNI — frente</label>
+       <div class="upload-box ${uploadedFiles.dni_frente ? 'uploaded' : ''}" id="box-dni-frente">
+         <div class="upload-icon">🪪</div>
+         <div class="upload-text">${uploadedFiles.dni_frente ? '✓ Foto cargada' : 'Tocá para subir una foto'}</div>
+         <div class="upload-sub">JPG o PNG · máx 5MB</div>
+         <input type="file" accept="image/*" onchange="handleFile('dni_frente', this, 'box-dni-frente')" />
+       </div>
+     </div>
+     <div class="field">
+       <label>DNI — dorso</label>
+       <div class="upload-box ${uploadedFiles.dni_dorso ? 'uploaded' : ''}" id="box-dni-dorso">
+         <div class="upload-icon">🪪</div>
+         <div class="upload-text">${uploadedFiles.dni_dorso ? '✓ Foto cargada' : 'Tocá para subir una foto'}</div>
+         <div class="upload-sub">JPG o PNG · máx 5MB</div>
+         <input type="file" accept="image/*" onchange="handleFile('dni_dorso', this, 'box-dni-dorso')" />
+       </div>
+     </div>
+     <div class="field">
+       <label>Selfie sosteniendo el DNI</label>
+       <div class="upload-box ${uploadedFiles.selfie ? 'uploaded' : ''}" id="box-selfie">
+         <div class="upload-icon">🤳</div>
+         <div class="upload-text">${uploadedFiles.selfie ? '✓ Foto cargada' : 'Cara visible y DNI legible'}</div>
+         <div class="upload-sub">No capturas de pantalla</div>
+         <input type="file" accept="image/*" onchange="handleFile('selfie', this, 'box-selfie')" />
+       </div>
+     </div>`,
+
+    // PASO 3
+    `<div class="step-heading">Perfil profesional</div>
+     <div class="step-desc">Esto es lo que ven los clientes cuando te encuentran en MANO.</div>
+     <div class="field">
+       <label>Descripción breve</label>
+       <textarea id="f-descripcion" placeholder="Ej: Plomero con 15 años de experiencia en CABA...">${pre.descripcion||''}</textarea>
+     </div>
+     <div class="field-row">
+       <div class="field">
+         <label>Oficio principal</label>
+         <select id="f-oficio">
+           ${["Plomería","Electricidad","Gasista","Pintura","Cerrajería","Albañilería","Limpieza","Mudanzas","Técnico electrónico","Carpintería"].map(o => `<option ${pre.oficio===o?'selected':''}>${o}</option>`).join('')}
+         </select>
+       </div>
+       <div class="field">
+         <label>Años de experiencia</label>
+         <select id="f-experiencia">
+           ${["Menos de 1 año","1-3 años","3-5 años","5-10 años","Más de 10 años"].map(e => `<option ${pre.experiencia===e?'selected':''}>${e}</option>`).join('')}
+         </select>
+       </div>
+     </div>
+     <div class="field"><label>Matrícula (requerido para gasistas y electricistas)</label><input type="text" id="f-matricula" value="${pre.matricula||''}" placeholder="Ej: MAT-12345" /></div>
+     <div class="divider"></div>
+     <div class="field"><label>Instagram o red social (opcional)</label><input type="text" id="f-instagram" value="${pre.instagram||''}" placeholder="@usuario o link" /></div>
+     <div class="field"><label>Sitio web o portfolio (opcional)</label><input type="url" id="f-web" value="${pre.sitio_web||''}" placeholder="https://..." /></div>`,
+
+    // PASO 4
+    `<div class="step-heading">Trabajos anteriores</div>
+     <div class="step-desc">Subí fotos de trabajos realizados. Genera mucha más confianza en los clientes.</div>
+     <div class="upload-grid">
+       ${[1,2,3,4,5,6].map(i => `
+         <div class="upload-thumb ${uploadedFiles['foto_'+i] ? 'uploaded' : ''}" id="thumb-${i}">
+           <div class="upload-thumb-icon">+</div>
+           <span style="font-size:10px;">Foto ${i}</span>
+           <input type="file" accept="image/*" onchange="handleFotoTrabajo(${i}, this)" />
+         </div>
+       `).join('')}
+     </div>
+     <div class="field" style="margin-top:14px;">
+       <label>Descripción de los trabajos (opcional)</label>
+       <textarea id="f-desc-trabajos" placeholder="Ej: Reparación de pérdida en baño, Palermo 2024...">${pre.descripcion_trabajos||''}</textarea>
+     </div>`
+  ];
+
+  document.getElementById('wizard-body').innerHTML = bodies[currentStep];
+
+  if (currentStep === 0) {
+    if (pre.barrios) {
+      pre.barrios.split(',').forEach(b => selectedBarrios.add(b.trim()));
+    }
+    renderTags();
+  }
+}
+
+function renderTags() {
+  const wrap = document.getElementById('tags-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = BARRIOS.map(b => `
+    <span class="tag ${selectedBarrios.has(b) ? 'active' : ''}" onclick="toggleBarrio('${b}')">${b}</span>
+  `).join('');
+}
+
+function toggleBarrio(b) {
+  if (selectedBarrios.has(b)) selectedBarrios.delete(b);
+  else selectedBarrios.add(b);
+  renderTags();
+}
+
+function handleFile(key, input, boxId) {
+  const file = input.files[0];
+  if (!file) return;
+  uploadedFiles[key] = file;
+  const box = document.getElementById(boxId);
+  box.classList.add('uploaded');
+  box.querySelector('.upload-text').textContent = '✓ ' + file.name;
+}
+
+function handleFotoTrabajo(i, input) {
+  const file = input.files[0];
+  if (!file) return;
+  uploadedFiles['foto_' + i] = file;
+  const thumb = document.getElementById('thumb-' + i);
+  thumb.classList.add('uploaded');
+  const reader = new FileReader();
+  reader.onload = e => {
+    thumb.innerHTML = `<img src="${e.target.result}" /><input type="file" accept="image/*" onchange="handleFotoTrabajo(${i}, this)" />`;
+  };
+  reader.readAsDataURL(file);
+}
+
+function getStepData() {
+  const pre = existingProfile || {};
+  if (currentStep === 0) return {
+    nombre: document.getElementById('f-nombre')?.value.trim() || pre.nombre,
+    apellido: document.getElementById('f-apellido')?.value.trim() || pre.apellido,
+    telefono: document.getElementById('f-telefono')?.value.trim() || pre.telefono,
+    fecha_nacimiento: document.getElementById('f-fecha')?.value || pre.fecha_nacimiento,
+    barrios: Array.from(selectedBarrios).join(', ')
+  };
+  if (currentStep === 2) return {
+    descripcion: document.getElementById('f-descripcion')?.value.trim() || pre.descripcion,
+    oficio: document.getElementById('f-oficio')?.value || pre.oficio,
+    experiencia: document.getElementById('f-experiencia')?.value || pre.experiencia,
+    matricula: document.getElementById('f-matricula')?.value.trim() || pre.matricula,
+    instagram: document.getElementById('f-instagram')?.value.trim() || pre.instagram,
+    sitio_web: document.getElementById('f-web')?.value.trim() || pre.sitio_web
+  };
+  if (currentStep === 3) return {
+    descripcion_trabajos: document.getElementById('f-desc-trabajos')?.value.trim() || pre.descripcion_trabajos
+  };
+  return {};
+}
+
+async function uploadFile(file, path) {
+  const { data, error } = await sb.storage.from('verificacion').upload(path, file, { upsert: true });
+  if (error) return null;
+  const { data: { publicUrl } } = sb.storage.from('verificacion').getPublicUrl(path);
+  return publicUrl;
+}
+
+async function saveStep() {
+  const btn = document.getElementById('btn-next');
+  btn.disabled = true;
+  btn.textContent = 'Guardando...';
+
+  try {
+    let data = getStepData();
+
+    if (currentStep === 1) {
+      const uid = currentUser.id;
+      if (uploadedFiles.dni_frente) {
+        const url = await uploadFile(uploadedFiles.dni_frente, `${uid}/dni_frente`);
+        if (url) data.dni_frente_url = url;
+      }
+      if (uploadedFiles.dni_dorso) {
+        const url = await uploadFile(uploadedFiles.dni_dorso, `${uid}/dni_dorso`);
+        if (url) data.dni_dorso_url = url;
+      }
+      if (uploadedFiles.selfie) {
+        const url = await uploadFile(uploadedFiles.selfie, `${uid}/selfie`);
+        if (url) data.selfie_url = url;
+      }
+    }
+
+    if (currentStep === 3) {
+      const uid = currentUser.id;
+      const urls = [];
+      for (let i = 1; i <= 6; i++) {
+        if (uploadedFiles['foto_' + i]) {
+          const url = await uploadFile(uploadedFiles['foto_' + i], `${uid}/trabajo_${i}`);
+          if (url) urls.push(url);
+        }
+      }
+      if (urls.length) data.fotos_trabajos = urls.join(',');
+      data.estado = 'enviado';
+    }
+
+    data.user_id = currentUser.id;
+
+    if (existingProfile) {
+      await sb.from('profesionales').update(data).eq('user_id', currentUser.id);
+    } else {
+      const { data: newProfile } = await sb.from('profesionales').insert(data).select().single();
+      existingProfile = newProfile;
+    }
+
+    existingProfile = { ...existingProfile, ...data };
+
+  } catch(e) {
+    console.error(e);
+  }
+
+  btn.disabled = false;
+}
+
+async function nextStep() {
+  await saveStep();
+  if (currentStep < STEPS.length - 1) {
+    currentStep++;
+    renderStep();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    renderSuccess();
+  }
+}
+
+function prevStep() {
+  if (currentStep > 0) {
+    currentStep--;
+    renderStep();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function renderSuccess() {
+  app.innerHTML = `
+    <div class="card-body">
+      <div class="success-wrap">
+        <div class="success-icon">✓</div>
+        <div class="success-title">¡Perfil enviado!</div>
+        <div class="success-desc">El equipo de MANO va a revisar tu información en los próximos días hábiles. Te avisamos a tu mail cuando esté aprobado y listo para recibir clientes.</div>
+        <div class="status-card">
+          <div class="status-dot"></div>
+          <div>
+            <div class="status-label">Pendiente de revisión</div>
+            <div class="status-sub">Revisión en 2-5 días hábiles</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+init();
+</script>
+</body>
+</html>

@@ -613,7 +613,7 @@ async function doForgotPassword() {
   btn.textContent = 'Enviando...';
 
   const { error } = await sb.auth.resetPasswordForEmail(email, {
-    redirectTo: 'https://mano-profesionales.netlify.app/panel.html'
+    redirectTo: 'https://mano-caba.netlify.app/panel.html'
   });
 
   if (error) {
@@ -766,7 +766,7 @@ async function doRegister() {
     email, 
     password: pass, 
     options: { 
-      emailRedirectTo: 'https://mano-profesionales.netlify.app/panel.html',
+      emailRedirectTo: 'https://mano-caba.netlify.app/panel.html',
       data: { rol: rolElegido }
     } 
   });

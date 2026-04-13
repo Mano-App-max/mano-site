@@ -445,74 +445,81 @@ h1 em {
 }
 
 /* COMO FUNCIONA */
-.how-section {
-  background: var(--navy);
-  padding: 5rem 2rem;
-}
+.how-section { background: var(--navy); padding: 5rem 2rem; }
+.how-inner { max-width: 1100px; margin: 0 auto; }
+.how-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+.how-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.03em; color: var(--white); margin-bottom: 0.75rem; line-height: 1.1; }
 
-.how-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-}
+.phones-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 768px) { .phones-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; } }
 
-.how-tag {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
-  margin-bottom: 1rem;
-}
+.phone-step-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.phone-step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.phone-step-title { font-size: 15px; font-weight: 600; color: white; }
+.phone-step-desc { font-size: 13px; color: rgba(255,255,255,0.5); margin: 0 0 16px 38px; line-height: 1.6; }
 
-.how-title {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: clamp(28px, 4vw, 40px);
-  letter-spacing: -0.02em;
-  color: var(--white);
-  margin-bottom: 3rem;
-  line-height: 1.15;
-}
+.phone-frame { background: var(--navy2); border-radius: 26px; padding: 3px; border: 1px solid rgba(255,255,255,0.08); }
+.phone-frame-inner { background: #f0ede8; border-radius: 24px; overflow: hidden; }
 
-.steps {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2px;
-}
+.pf-bar { background: var(--navy); padding: 12px 14px 10px; display: flex; align-items: center; justify-content: space-between; }
+.pf-logo { color: white; font-weight: 800; font-size: 15px; letter-spacing: -0.04em; font-family: 'Syne', sans-serif; }
+.pf-logo span { color: var(--blue); }
+.pf-loc { color: rgba(255,255,255,0.45); font-size: 10px; margin-top: 2px; }
+.pf-actions { display: flex; gap: 5px; }
+.pf-btn { width: 28px; height: 28px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+.pf-avatar { width: 28px; height: 28px; background: rgba(255,255,255,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white; }
+.pf-body { padding: 10px; }
 
-.step {
-  background: var(--navy2);
-  padding: 2rem 1.5rem;
-  position: relative;
-}
+.pf-search { background: white; border: 1px solid #e2ddd6; border-radius: 10px; padding: 8px 12px; font-size: 11px; color: #999; margin-bottom: 7px; display: flex; align-items: center; gap: 5px; }
+.pf-urgency { background: #c0392b; border-radius: 10px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.pf-urg-title { color: white; font-size: 11px; font-weight: 700; }
+.pf-urg-sub { color: rgba(255,255,255,0.75); font-size: 9px; margin-top: 1px; }
+.pf-cat-title { font-size: 11px; font-weight: 600; color: var(--navy); margin-bottom: 7px; }
+.pf-cat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+.pf-cat { background: white; border: 1px solid #e2ddd6; border-radius: 8px; padding: 7px 3px 5px; text-align: center; }
+.pf-cat-active { border-color: var(--blue); background: #eef2fb; }
+.pf-cat-icon { font-size: 14px; margin-bottom: 2px; }
+.pf-cat-lbl { font-size: 8px; color: #555; }
 
-.step:first-child { border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
-.step:last-child { border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+.pf-pub-btn { background: var(--blue); border-radius: 10px; padding: 10px; color: white; font-size: 10px; font-weight: 600; text-align: center; margin-bottom: 10px; }
+.pf-profs-title { font-size: 11px; font-weight: 600; color: var(--navy); margin-bottom: 7px; }
+.pf-prof-card { background: white; border: 1px solid #e2ddd6; border-radius: 10px; padding: 9px; margin-bottom: 5px; display: flex; gap: 8px; align-items: flex-start; }
+.pf-av { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+.pf-av-blue { background: #d0daf7; color: #1a3a8f; }
+.pf-av-amber { background: #fdefc9; color: #7a4e10; }
+.pf-av-green { background: #d0f0e0; color: #0f5f30; }
+.pf-pname { font-size: 11px; font-weight: 700; color: var(--navy); }
+.pf-vbadge { background: #e8f5ee; color: #0f6e3a; font-size: 8px; font-weight: 600; padding: 2px 6px; border-radius: 99px; margin-left: 4px; }
+.pf-oficio { font-size: 9px; color: #666; margin: 2px 0; }
+.pf-stars { font-size: 10px; color: #f59e0b; }
+.pf-stars span { color: #888; font-size: 9px; }
+.pf-loc2 { font-size: 9px; color: #aaa; margin-top: 1px; }
 
-.step-num {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 40px;
-  color: rgba(255,255,255,0.08);
-  line-height: 1;
-  margin-bottom: 1rem;
-}
+.pf-profile-card { background: white; border: 1px solid #e2ddd6; border-radius: 14px; padding: 12px; }
+.pf-profile-head { display: flex; align-items: flex-start; gap: 9px; margin-bottom: 11px; }
+.pf-profile-name { font-size: 13px; font-weight: 700; color: var(--navy); }
+.pf-badges-row { display: flex; gap: 4px; margin-top: 4px; flex-wrap: wrap; }
+.pf-badge-v { background: #eef2fb; color: #1a3a8f; font-size: 8px; font-weight: 600; padding: 2px 7px; border-radius: 99px; }
+.pf-badge-d { background: #e4f4ec; color: #0f6e3a; font-size: 8px; font-weight: 600; padding: 2px 7px; border-radius: 99px; }
+.pf-stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; margin-bottom: 9px; }
+.pf-stat { background: #f5f3ef; border-radius: 8px; padding: 6px; text-align: center; }
+.pf-stat-val { font-size: 13px; font-weight: 700; color: var(--navy); }
+.pf-stat-lbl { font-size: 8px; color: #999; margin-top: 1px; }
+.pf-bio { font-size: 10px; color: #555; line-height: 1.5; margin-bottom: 9px; }
+.pf-barrios-lbl { font-size: 10px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.pf-barrios { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 9px; }
+.pf-barrio { background: #f5f3ef; border: 1px solid #e2ddd6; border-radius: 99px; font-size: 8px; color: #555; padding: 2px 8px; }
+.pf-btns-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 7px; }
+.pf-btn-chat { background: var(--navy); color: white; border-radius: 99px; padding: 8px; font-size: 10px; font-weight: 600; text-align: center; }
+.pf-btn-call { background: white; color: var(--navy); border: 1.5px solid var(--navy); border-radius: 99px; padding: 8px; font-size: 10px; font-weight: 600; text-align: center; }
+.pf-garantia { background: #fffbf0; border: 1px solid #fde68a; border-radius: 8px; padding: 8px 10px; }
+.pf-garantia-title { font-size: 10px; font-weight: 700; color: #92400e; margin-bottom: 2px; }
+.pf-garantia-desc { font-size: 9px; color: #a16207; line-height: 1.4; }
 
-.step-icon { font-size: 24px; margin-bottom: 0.75rem; }
-
-.step-title {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--white);
-  margin-bottom: 6px;
-}
-
-.step-desc {
-  font-size: 13px;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.6;
-}
+.pf-tabbar { background: white; border-top: 1px solid #e2ddd6; display: flex; padding: 6px 0 4px; }
+.pf-tab { flex: 1; text-align: center; font-size: 8px; color: #aaa; }
+.pf-tab-active { color: var(--navy); font-weight: 600; }
+.pf-tab-icon { font-size: 13px; margin-bottom: 2px; }
 
 /* FORM SECTION */
 .form-section {
@@ -860,35 +867,137 @@ footer {
 </section>
 
 <!-- COMO FUNCIONA -->
-<section class="how-section">
+<section class="how-section" id="como-funciona">
   <div class="how-inner">
-    <div class="how-tag">Cómo funciona</div>
-    <div class="how-title">Cuatro pasos, sin complicaciones</div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-icon">📋</div>
-        <div class="step-title">Creás tu perfil</div>
-        <div class="step-desc">Cargás tu oficio, los barrios donde trabajás y tus datos de contacto. Verificamos tu identidad.</div>
+    <div class="how-tag">Simple e intuitivo</div>
+    <div class="how-title">Todo en <em style="color:var(--blue);font-style:normal;">un toque</em></div>
+    <p style="font-size:16px;color:rgba(255,255,255,0.6);max-width:500px;line-height:1.7;margin-bottom:3.5rem;">Encontrá el profesional que necesitás, agendá y pagá de forma segura — sin llamadas, sin efectivo, sin vueltas.</p>
+
+    <div class="phones-grid">
+
+      <!-- PASO 1 -->
+      <div class="phone-col">
+        <div class="phone-step-row">
+          <div class="phone-step-num">1</div>
+          <div class="phone-step-title">Elegí el servicio</div>
+        </div>
+        <p class="phone-step-desc">Buscá por oficio o barrio. Si es urgente, encontrás disponibilidad al instante.</p>
+        <div class="phone-frame">
+          <div class="phone-frame-inner">
+            <div class="pf-bar">
+              <div><div class="pf-logo">MANO<span>.</span></div><div class="pf-loc">📍 CABA, Buenos Aires</div></div>
+              <div class="pf-actions"><div class="pf-btn">🔔</div><div class="pf-avatar">JD</div></div>
+            </div>
+            <div class="pf-body">
+              <div class="pf-search">🔍 <span>¿Qué necesitás? Ej: plomero...</span></div>
+              <div class="pf-urgency">
+                <div><div class="pf-urg-title">🚨 ¿Urgencia?</div><div class="pf-urg-sub">Encontrá un profesional disponible ahora</div></div>
+                <span style="color:white;font-size:16px;">→</span>
+              </div>
+              <div class="pf-cat-title">Categorías</div>
+              <div class="pf-cat-grid">
+                <div class="pf-cat"><div class="pf-cat-icon">🔧</div><div class="pf-cat-lbl">Plomería</div></div>
+                <div class="pf-cat pf-cat-active"><div class="pf-cat-icon">⚡</div><div class="pf-cat-lbl">Electr.</div></div>
+                <div class="pf-cat"><div class="pf-cat-icon">🔥</div><div class="pf-cat-lbl">Gasista</div></div>
+                <div class="pf-cat"><div class="pf-cat-icon">🎨</div><div class="pf-cat-lbl">Pintura</div></div>
+                <div class="pf-cat"><div class="pf-cat-icon">🔑</div><div class="pf-cat-lbl">Cerraj.</div></div>
+                <div class="pf-cat"><div class="pf-cat-icon">🧹</div><div class="pf-cat-lbl">Limpieza</div></div>
+                <div class="pf-cat"><div class="pf-cat-icon">🧱</div><div class="pf-cat-lbl">Albañ.</div></div>
+                <div class="pf-cat"><div class="pf-cat-icon">📦</div><div class="pf-cat-lbl">Mudanza</div></div>
+                <div class="pf-cat"><div class="pf-cat-icon">💻</div><div class="pf-cat-lbl">Técnico</div></div>
+                <div class="pf-cat"><div class="pf-cat-icon">🪚</div><div class="pf-cat-lbl">Carpint.</div></div>
+              </div>
+            </div>
+            <div class="pf-tabbar">
+              <div class="pf-tab pf-tab-active"><div class="pf-tab-icon">🏠</div>Inicio</div>
+              <div class="pf-tab"><div class="pf-tab-icon">📋</div>Solicitudes</div>
+              <div class="pf-tab"><div class="pf-tab-icon">💬</div>Chat</div>
+              <div class="pf-tab"><div class="pf-tab-icon">👤</div>Perfil</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-icon">🔔</div>
-        <div class="step-title">Recibís solicitudes</div>
-        <div class="step-desc">Cuando alguien en tu zona necesita tu oficio, te llega una notificación con los detalles del trabajo.</div>
+
+      <!-- PASO 2 -->
+      <div class="phone-col">
+        <div class="phone-step-row">
+          <div class="phone-step-num">2</div>
+          <div class="phone-step-title">Elegí un profesional</div>
+        </div>
+        <p class="phone-step-desc">Todos verificados por MANO. Ves calificaciones, barrios y precio antes de contratar.</p>
+        <div class="phone-frame">
+          <div class="phone-frame-inner">
+            <div class="pf-bar">
+              <div><div class="pf-logo">MANO<span>.</span></div><div class="pf-loc">📍 CABA, Buenos Aires</div></div>
+              <div class="pf-actions"><div class="pf-btn">🔔</div><div class="pf-avatar">JD</div></div>
+            </div>
+            <div class="pf-body">
+              <div class="pf-pub-btn">📋 Publicar solicitud de servicio</div>
+              <div class="pf-profs-title">Profesionales destacados</div>
+              <div class="pf-prof-card">
+                <div class="pf-av pf-av-blue">CM</div>
+                <div><div><span class="pf-pname">Carlos Méndez</span><span class="pf-vbadge">✓ Verificado</span></div><div class="pf-oficio">🔧 Plomería · $$</div><div class="pf-stars">★★★★½ <span>4.9</span></div><div class="pf-loc2">📍 Palermo, Recoleta · 187 trabajos</div></div>
+              </div>
+              <div class="pf-prof-card">
+                <div class="pf-av pf-av-amber">ML</div>
+                <div><div><span class="pf-pname">María López</span><span class="pf-vbadge">✓ Verificado</span></div><div class="pf-oficio">⚡ Electricidad · $$$</div><div class="pf-stars">★★★★★ <span>4.8</span></div><div class="pf-loc2">📍 Caballito, Almagro · 134 trabajos</div></div>
+              </div>
+              <div class="pf-prof-card">
+                <div class="pf-av pf-av-green">RD</div>
+                <div><div><span class="pf-pname">Roberto Díaz</span><span class="pf-vbadge">✓ Verificado</span></div><div class="pf-oficio">🔥 Gasista · $$</div><div class="pf-stars">★★★★½ <span>4.6</span></div><div class="pf-loc2">📍 Villa Crespo, Chacarita · 72 trabajos</div></div>
+              </div>
+            </div>
+            <div class="pf-tabbar">
+              <div class="pf-tab pf-tab-active"><div class="pf-tab-icon">🏠</div>Inicio</div>
+              <div class="pf-tab"><div class="pf-tab-icon">📋</div>Solicitudes</div>
+              <div class="pf-tab"><div class="pf-tab-icon">💬</div>Chat</div>
+              <div class="pf-tab"><div class="pf-tab-icon">👤</div>Perfil</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-icon">💬</div>
-        <div class="step-title">Enviás tu presupuesto</div>
-        <div class="step-desc">Mandás tu precio y tiempo estimado. Si al cliente le cierra, acordás los detalles por el chat de la app.</div>
+
+      <!-- PASO 3 -->
+      <div class="phone-col">
+        <div class="phone-step-row">
+          <div class="phone-step-num">3</div>
+          <div class="phone-step-title">Agendá y pagá seguro</div>
+        </div>
+        <p class="phone-step-desc">El pago queda en custodia. Se libera al profesional solo cuando terminás conforme.</p>
+        <div class="phone-frame">
+          <div class="phone-frame-inner">
+            <div class="pf-bar">
+              <div><div class="pf-logo">MANO<span>.</span></div><div class="pf-loc">📍 CABA, Buenos Aires</div></div>
+              <div class="pf-actions"><div class="pf-btn">🔔</div><div class="pf-avatar">JD</div></div>
+            </div>
+            <div class="pf-body">
+              <div class="pf-profile-card">
+                <div class="pf-profile-head">
+                  <div class="pf-av pf-av-green" style="width:42px;height:42px;border-radius:12px;font-size:13px;">RD</div>
+                  <div><div class="pf-profile-name">Roberto Díaz</div><div class="pf-badges-row"><span class="pf-badge-v">✓ Verificado MANO</span><span class="pf-badge-d">● Disponible</span></div></div>
+                </div>
+                <div class="pf-stats-grid">
+                  <div class="pf-stat"><div class="pf-stat-val">⭐ 4.6</div><div class="pf-stat-lbl">Rating</div></div>
+                  <div class="pf-stat"><div class="pf-stat-val">72</div><div class="pf-stat-lbl">Trabajos</div></div>
+                  <div class="pf-stat"><div class="pf-stat-val">$$</div><div class="pf-stat-lbl">Precio</div></div>
+                </div>
+                <div class="pf-bio">Gasista matriculado. Instalaciones, reparaciones y revisiones obligatorias.</div>
+                <div class="pf-barrios-lbl">📍 Barrios donde trabaja:</div>
+                <div class="pf-barrios"><span class="pf-barrio">Villa Crespo</span><span class="pf-barrio">Chacarita</span><span class="pf-barrio">Colegiales</span></div>
+                <div class="pf-btns-row">
+                  <div class="pf-btn-chat">💬 Chatear</div>
+                  <div class="pf-btn-call">📞 Llamar</div>
+                </div>
+                <div class="pf-garantia">
+                  <div class="pf-garantia-title">🔵 Garantía MANO</div>
+                  <div class="pf-garantia-desc">Si no quedás conforme, te reenviamos otro profesional sin costo adicional.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <div class="step-icon">💰</div>
-        <div class="step-title">Cobrás seguro</div>
-        <div class="step-desc">El cliente ya pagó por anticipado. Al terminar el trabajo, los fondos se liberan automáticamente a tu cuenta.</div>
-      </div>
+
     </div>
   </div>
 </section>

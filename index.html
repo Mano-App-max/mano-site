@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MANO — Sumate como profesional</title>
+<title>MANO — Servicios para el hogar en CABA</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -24,443 +24,108 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
+body { font-family: 'Instrument Sans', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
 
-body {
-  font-family: 'Instrument Sans', sans-serif;
-  background: var(--cream);
-  color: var(--text);
-  overflow-x: hidden;
-}
-
-/* NAV */
 nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   padding: 1rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(247,244,239,0.88);
-  backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(247,244,239,0.92); backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--cream2);
 }
-
-.nav-logo {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 22px;
-  letter-spacing: -0.04em;
-  color: var(--navy);
-}
-
+.nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: -0.04em; color: var(--navy); text-decoration: none; }
 .nav-logo span { color: var(--blue); }
-
-.nav-cta {
-  background: var(--navy);
-  color: var(--white);
-  font-family: 'Instrument Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 8px 18px;
-  border-radius: 99px;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.15s;
-}
-.nav-cta:hover { background: var(--blue); }
+.nav-links { display: flex; align-items: center; gap: 24px; }
+.nav-links a { font-size: 13px; color: var(--text2); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover { color: var(--navy); }
+.nav-cta { background: var(--navy); color: var(--white) !important; font-size: 13px; font-weight: 500; padding: 8px 18px; border-radius: 99px; border: none; cursor: pointer; text-decoration: none; transition: background 0.15s; }
+.nav-cta:hover { background: var(--blue) !important; }
+.nav-pro-link { font-size: 13px; color: var(--blue) !important; font-weight: 500; }
 
 /* HERO */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 7rem 2rem 4rem;
-  position: relative;
-  overflow: hidden;
-}
-
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 7rem 2rem 4rem; position: relative; overflow: hidden; }
 .hero-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(26,86,219,0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(14,159,110,0.06) 0%, transparent 70%);
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 80% 20%, rgba(26,86,219,0.08) 0%, transparent 70%),
+              radial-gradient(ellipse 40% 40% at 10% 80%, rgba(14,159,110,0.06) 0%, transparent 70%);
   pointer-events: none;
 }
+.hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.hero-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--blue-light); color: var(--blue); font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 99px; margin-bottom: 1.5rem; letter-spacing: 0.02em; }
+.hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
 
-.hero-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.hero-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--blue-light);
-  color: var(--blue);
-  font-size: 12px;
-  font-weight: 500;
-  padding: 5px 12px;
-  border-radius: 99px;
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.02em;
-}
-
-.hero-tag-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--blue);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
-}
-
-h1 {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: clamp(36px, 5vw, 58px);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  color: var(--navy);
-  margin-bottom: 1.25rem;
-}
-
-h1 em {
-  font-style: normal;
-  color: var(--blue);
-}
-
-.hero-sub {
-  font-size: 17px;
-  color: var(--text2);
-  line-height: 1.65;
-  margin-bottom: 2rem;
-  max-width: 440px;
-}
-
-.hero-stats {
-  display: flex;
-  gap: 2rem;
-  margin-top: 2.5rem;
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.stat-num {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-  color: var(--navy);
-  letter-spacing: -0.02em;
-}
-
-.stat-label {
-  font-size: 12px;
-  color: var(--text3);
-}
+h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(36px,5vw,58px); line-height: 1.05; letter-spacing: -0.03em; color: var(--navy); margin-bottom: 1.25rem; }
+h1 em { font-style: normal; color: var(--blue); }
+.hero-sub { font-size: 17px; color: var(--text2); line-height: 1.65; margin-bottom: 2rem; max-width: 440px; }
+.hero-btn { display: inline-block; background: var(--navy); color: var(--white); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; padding: 14px 28px; border-radius: var(--radius); text-decoration: none; transition: background 0.15s; }
+.hero-btn:hover { background: var(--blue); }
+.hero-stats { display: flex; gap: 2rem; margin-top: 2.5rem; }
+.stat { display: flex; flex-direction: column; gap: 2px; }
+.stat-num { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 24px; color: var(--navy); letter-spacing: -0.02em; }
+.stat-label { font-size: 12px; color: var(--text3); }
 
 /* PHONE MOCKUP */
-.phone-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.phone {
-  width: 260px;
-  background: var(--navy);
-  border-radius: 36px;
-  padding: 12px;
-  position: relative;
-  box-shadow: 0 40px 80px rgba(13,31,60,0.25), 0 8px 20px rgba(13,31,60,0.15);
-}
-
-.phone-notch {
-  width: 80px; height: 10px;
-  background: var(--navy2);
-  border-radius: 99px;
-  margin: 0 auto 10px;
-}
-
-.phone-screen {
-  background: var(--white);
-  border-radius: 26px;
-  overflow: hidden;
-}
-
-.phone-header {
-  background: var(--navy);
-  padding: 14px 16px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.phone-logo {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 15px;
-  color: var(--white);
-  letter-spacing: -0.02em;
-}
-
-.phone-loc {
-  font-size: 10px;
-  color: rgba(255,255,255,0.55);
-  margin-top: 1px;
-}
-
-.phone-bell {
-  width: 28px; height: 28px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-}
-
+.phone-wrap { display: flex; justify-content: center; align-items: center; position: relative; animation: fadeUp 0.8s ease 0.3s both; }
+.phone { width: 260px; background: var(--navy); border-radius: 36px; padding: 12px; position: relative; box-shadow: 0 40px 80px rgba(13,31,60,0.25), 0 8px 20px rgba(13,31,60,0.15); }
+.phone-notch { width: 80px; height: 10px; background: var(--navy2); border-radius: 99px; margin: 0 auto 10px; }
+.phone-screen { background: var(--white); border-radius: 26px; overflow: hidden; }
+.phone-header { background: var(--navy); padding: 14px 16px 10px; display: flex; align-items: center; justify-content: space-between; }
+.phone-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 15px; color: var(--white); letter-spacing: -0.02em; }
+.phone-loc { font-size: 10px; color: rgba(255,255,255,0.55); margin-top: 1px; }
+.phone-bell { width: 28px; height: 28px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
 .phone-body { padding: 12px; }
-
-.phone-search {
-  background: #f4f5f7;
-  border-radius: 10px;
-  padding: 9px 12px;
-  font-size: 11px;
-  color: #9aa;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.phone-urgent {
-  background: #fee2e2;
-  border-radius: 10px;
-  padding: 10px 12px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.phone-urgent-label {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 12px;
-  color: #c0392b;
-}
-
-.phone-urgent-sub {
-  font-size: 10px;
-  color: #e57373;
-  margin-top: 1px;
-}
-
-.phone-cats {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 12px;
-  color: var(--navy);
-  margin-bottom: 8px;
-}
-
-.phone-cat-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
-}
-
-.phone-cat {
-  background: #f7f8fa;
-  border-radius: 8px;
-  padding: 8px 4px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-
+.phone-search { background: #f4f5f7; border-radius: 10px; padding: 9px 12px; font-size: 11px; color: #9aa; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.phone-urgent { background: #fee2e2; border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+.phone-urgent-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 12px; color: #c0392b; }
+.phone-urgent-sub { font-size: 10px; color: #e57373; margin-top: 1px; }
+.phone-cats { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 12px; color: var(--navy); margin-bottom: 8px; }
+.phone-cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.phone-cat { background: #f7f8fa; border-radius: 8px; padding: 8px 4px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .phone-cat-icon { font-size: 16px; }
 .phone-cat-name { font-size: 8px; color: var(--text2); text-align: center; }
-
-.phone-pro {
-  background: var(--white);
-  border: 1px solid #f0f0f0;
-  border-radius: 10px;
-  padding: 10px;
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.phone-avatar {
-  width: 32px; height: 32px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 11px;
-  color: var(--white);
-  flex-shrink: 0;
-}
-
+.phone-pro { background: var(--white); border: 1px solid #f0f0f0; border-radius: 10px; padding: 10px; margin-top: 10px; display: flex; align-items: center; gap: 8px; }
+.phone-avatar { width: 32px; height: 32px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 11px; color: var(--white); flex-shrink: 0; }
 .phone-pro-name { font-size: 11px; font-weight: 500; color: var(--navy); }
 .phone-pro-meta { font-size: 9px; color: var(--text3); margin-top: 1px; }
 .phone-pro-stars { font-size: 9px; color: #f59e0b; }
 
-.float-badge {
-  position: absolute;
-  right: -20px;
-  top: 80px;
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: 10px 14px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  white-space: nowrap;
-}
-
-.float-badge-icon {
-  width: 32px; height: 32px;
-  background: var(--green-light);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-}
-
+.float-badge { position: absolute; right: -20px; top: 80px; background: var(--white); border-radius: var(--radius); padding: 10px 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.float-badge-icon { width: 32px; height: 32px; background: var(--green-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
 .float-badge-title { font-size: 12px; font-weight: 500; color: var(--navy); }
 .float-badge-sub { font-size: 10px; color: var(--text3); }
-
-.float-badge2 {
-  position: absolute;
-  left: -20px;
-  bottom: 80px;
-  background: var(--navy);
-  border-radius: var(--radius);
-  padding: 10px 14px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  white-space: nowrap;
-}
-
+.float-badge2 { position: absolute; left: -20px; bottom: 80px; background: var(--navy); border-radius: var(--radius); padding: 10px 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); white-space: nowrap; }
 .float-badge2-title { font-size: 11px; font-weight: 500; color: var(--white); }
 .float-badge2-sub { font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 2px; }
 
-/* BENEFICIOS */
-.section {
-  padding: 5rem 2rem;
-}
+/* SECCIONES */
+.section { padding: 5rem 2rem; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 1rem; }
+.section-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(28px,4vw,40px); letter-spacing: -0.02em; color: var(--navy); margin-bottom: 3rem; max-width: 500px; line-height: 1.15; }
 
-.section-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.section-tag {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--blue);
-  margin-bottom: 1rem;
-}
-
-.section-title {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: clamp(28px, 4vw, 40px);
-  letter-spacing: -0.02em;
-  color: var(--navy);
-  margin-bottom: 3rem;
-  max-width: 500px;
-  line-height: 1.15;
-}
-
-.benefits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-}
-
-.benefit {
-  background: var(--white);
-  border: 1px solid var(--cream2);
-  border-radius: var(--radius-lg);
-  padding: 1.75rem;
-  transition: transform 0.15s, box-shadow 0.15s;
-}
-
-.benefit:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(13,31,60,0.08);
-}
-
-.benefit-icon {
-  width: 44px; height: 44px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  margin-bottom: 1rem;
-}
-
-.benefit-title {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--navy);
-  margin-bottom: 6px;
-}
-
-.benefit-desc {
-  font-size: 13.5px;
-  color: var(--text2);
-  line-height: 1.6;
-}
+/* BENEFICIOS CLIENTE */
+.benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.benefit { background: var(--white); border: 1px solid var(--cream2); border-radius: var(--radius-lg); padding: 1.75rem; transition: transform 0.15s, box-shadow 0.15s; }
+.benefit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,31,60,0.08); }
+.benefit-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 1rem; }
+.benefit-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 6px; }
+.benefit-desc { font-size: 13.5px; color: var(--text2); line-height: 1.6; }
 
 /* COMO FUNCIONA */
 .how-section { background: var(--navy); padding: 5rem 2rem; }
 .how-inner { max-width: 1100px; margin: 0 auto; }
 .how-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
-.how-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.03em; color: var(--white); margin-bottom: 0.75rem; line-height: 1.1; }
-
+.how-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(28px,4vw,42px); letter-spacing: -0.03em; color: var(--white); margin-bottom: 0.75rem; line-height: 1.1; }
 .phones-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
 @media (max-width: 768px) { .phones-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; } }
-
 .phone-step-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
 .phone-step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .phone-step-title { font-size: 15px; font-weight: 600; color: white; }
 .phone-step-desc { font-size: 13px; color: rgba(255,255,255,0.5); margin: 0 0 16px 38px; line-height: 1.6; }
-
 .phone-frame { background: var(--navy2); border-radius: 26px; padding: 3px; border: 1px solid rgba(255,255,255,0.08); }
 .phone-frame-inner { background: #f0ede8; border-radius: 24px; overflow: hidden; }
-
 .pf-bar { background: var(--navy); padding: 12px 14px 10px; display: flex; align-items: center; justify-content: space-between; }
 .pf-logo { color: white; font-weight: 800; font-size: 15px; letter-spacing: -0.04em; font-family: 'Syne', sans-serif; }
 .pf-logo span { color: var(--blue); }
@@ -469,7 +134,6 @@ h1 em {
 .pf-btn { width: 28px; height: 28px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; }
 .pf-avatar { width: 28px; height: 28px; background: rgba(255,255,255,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white; }
 .pf-body { padding: 10px; }
-
 .pf-search { background: white; border: 1px solid #e2ddd6; border-radius: 10px; padding: 8px 12px; font-size: 11px; color: #999; margin-bottom: 7px; display: flex; align-items: center; gap: 5px; }
 .pf-urgency { background: #c0392b; border-radius: 10px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
 .pf-urg-title { color: white; font-size: 11px; font-weight: 700; }
@@ -480,7 +144,6 @@ h1 em {
 .pf-cat-active { border-color: var(--blue); background: #eef2fb; }
 .pf-cat-icon { font-size: 14px; margin-bottom: 2px; }
 .pf-cat-lbl { font-size: 8px; color: #555; }
-
 .pf-pub-btn { background: var(--blue); border-radius: 10px; padding: 10px; color: white; font-size: 10px; font-weight: 600; text-align: center; margin-bottom: 10px; }
 .pf-profs-title { font-size: 11px; font-weight: 600; color: var(--navy); margin-bottom: 7px; }
 .pf-prof-card { background: white; border: 1px solid #e2ddd6; border-radius: 10px; padding: 9px; margin-bottom: 5px; display: flex; gap: 8px; align-items: flex-start; }
@@ -494,7 +157,6 @@ h1 em {
 .pf-stars { font-size: 10px; color: #f59e0b; }
 .pf-stars span { color: #888; font-size: 9px; }
 .pf-loc2 { font-size: 9px; color: #aaa; margin-top: 1px; }
-
 .pf-profile-card { background: white; border: 1px solid #e2ddd6; border-radius: 14px; padding: 12px; }
 .pf-profile-head { display: flex; align-items: flex-start; gap: 9px; margin-bottom: 11px; }
 .pf-profile-name { font-size: 13px; font-weight: 700; color: var(--navy); }
@@ -515,197 +177,66 @@ h1 em {
 .pf-garantia { background: #fffbf0; border: 1px solid #fde68a; border-radius: 8px; padding: 8px 10px; }
 .pf-garantia-title { font-size: 10px; font-weight: 700; color: #92400e; margin-bottom: 2px; }
 .pf-garantia-desc { font-size: 9px; color: #a16207; line-height: 1.4; }
-
 .pf-tabbar { background: white; border-top: 1px solid #e2ddd6; display: flex; padding: 6px 0 4px; }
 .pf-tab { flex: 1; text-align: center; font-size: 8px; color: #aaa; }
 .pf-tab-active { color: var(--navy); font-weight: 600; }
 .pf-tab-icon { font-size: 13px; margin-bottom: 2px; }
 
-/* FORM SECTION */
-.form-section {
+/* SECCIÓN PROFESIONALES CTA */
+.pro-cta-section {
   padding: 5rem 2rem;
-  background: var(--cream);
-}
-
-.form-section-inner {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.form-section-inner .section-title {
-  margin: 0 auto 0.75rem;
-  text-align: center;
-}
-
-.form-sub {
-  font-size: 16px;
-  color: var(--text2);
-  margin-bottom: 2.5rem;
-  line-height: 1.6;
-}
-
-.form-card {
-  background: var(--white);
-  border: 1px solid var(--cream2);
-  border-radius: var(--radius-lg);
-  padding: 2.5rem;
-  text-align: left;
-}
-
-.form-row {
-  margin-bottom: 1.25rem;
-}
-
-.form-row label {
-  display: block;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 6px;
-}
-
-.form-row input,
-.form-row select {
-  width: 100%;
-  padding: 11px 14px;
-  font-size: 14px;
-  font-family: 'Instrument Sans', sans-serif;
-  border: 1.5px solid var(--cream2);
-  border-radius: var(--radius);
-  background: var(--cream);
-  color: var(--text);
-  outline: none;
-  transition: border-color 0.15s, background 0.15s;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-.form-row input:focus,
-.form-row select:focus {
-  border-color: var(--blue);
-  background: var(--white);
-}
-
-.form-row input::placeholder { color: var(--text3); }
-
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.submit-btn {
-  width: 100%;
-  padding: 14px;
   background: var(--navy);
-  color: var(--white);
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 15px;
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: background 0.15s, transform 0.1s;
-  letter-spacing: -0.01em;
-  margin-top: 0.5rem;
 }
-
-.submit-btn:hover { background: var(--blue); }
-.submit-btn:active { transform: scale(0.99); }
-
-.form-note {
-  font-size: 12px;
-  color: var(--text3);
-  text-align: center;
-  margin-top: 1rem;
-  line-height: 1.5;
+.pro-cta-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
 }
+.pro-cta-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+.pro-cta-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(28px,4vw,42px); letter-spacing: -0.03em; color: var(--white); line-height: 1.1; margin-bottom: 1rem; }
+.pro-cta-title em { font-style: normal; color: var(--blue); }
+.pro-cta-sub { font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 2rem; }
+.pro-cta-btn { display: inline-block; background: var(--blue); color: var(--white); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; padding: 14px 28px; border-radius: var(--radius); text-decoration: none; transition: background 0.15s, transform 0.1s; }
+.pro-cta-btn:hover { background: #1a46c0; transform: translateY(-1px); }
+.pro-cta-points { display: flex; flex-direction: column; gap: 14px; }
+.pro-cta-point { display: flex; align-items: flex-start; gap: 12px; }
+.pro-cta-point-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.pro-cta-point-title { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 2px; }
+.pro-cta-point-desc { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.5; }
 
-/* SUCCESS */
-.success-state {
-  display: none;
-  text-align: center;
-  padding: 2rem;
-}
-
-.success-icon {
-  width: 64px; height: 64px;
-  background: var(--green-light);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  margin: 0 auto 1.25rem;
-}
-
-.success-title {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 22px;
-  color: var(--navy);
-  margin-bottom: 0.5rem;
-}
-
-.success-sub {
-  font-size: 15px;
-  color: var(--text2);
-  line-height: 1.6;
-}
+/* FAQ */
+.faq-section { padding: 5rem 2rem; background: var(--cream); }
+.faq-inner { max-width: 700px; margin: 0 auto; }
 
 /* FOOTER */
-footer {
-  background: var(--navy);
-  padding: 2rem;
-  text-align: center;
-}
-
-.footer-logo {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 18px;
-  color: var(--white);
-  letter-spacing: -0.03em;
-  margin-bottom: 0.5rem;
-}
-
+footer { background: var(--navy); padding: 2.5rem 2rem; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; color: var(--white); letter-spacing: -0.03em; }
 .footer-logo span { color: var(--blue); }
+.footer-sub { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 4px; }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.15s; }
+.footer-links a:hover { color: rgba(255,255,255,0.85); }
 
-.footer-sub {
-  font-size: 12px;
-  color: rgba(255,255,255,0.35);
-}
+/* HAMBURGER */
+button#hamburger { background:none; border:none; cursor:pointer; padding:8px; display:flex; flex-direction:column; gap:5px; position:relative; z-index:101; }
 
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.hero-content > * { animation: fadeUp 0.6s ease both; }
+.hero-content > *:nth-child(1){animation-delay:0.1s}
+.hero-content > *:nth-child(2){animation-delay:0.2s}
+.hero-content > *:nth-child(3){animation-delay:0.3s}
+.hero-content > *:nth-child(4){animation-delay:0.4s}
+.hero-content > *:nth-child(5){animation-delay:0.5s}
 
-.hero-content > * {
-  animation: fadeUp 0.6s ease both;
-}
-.hero-content > *:nth-child(1) { animation-delay: 0.1s; }
-.hero-content > *:nth-child(2) { animation-delay: 0.2s; }
-.hero-content > *:nth-child(3) { animation-delay: 0.3s; }
-.hero-content > *:nth-child(4) { animation-delay: 0.4s; }
-.hero-content > *:nth-child(5) { animation-delay: 0.5s; }
-
-.phone-wrap {
-  animation: fadeUp 0.8s ease 0.3s both;
-}
-
-/* RESPONSIVE */
 @media (max-width: 768px) {
   .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
   .phone-wrap { order: -1; }
   .float-badge { right: 0; top: -20px; }
   .float-badge2 { left: 0; bottom: -20px; }
-  .form-grid { grid-template-columns: 1fr; }
-  .step:first-child { border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
-  .step:last-child { border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
-  .steps { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .pro-cta-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
 }
 </style>
 </head>
@@ -713,26 +244,31 @@ footer {
 
 <nav>
   <div style="display:flex;align-items:center;gap:12px;">
-    <button id="hamburger" style="background:none;border:none;cursor:pointer;padding:8px;display:flex;flex-direction:column;gap:5px;position:relative;z-index:101;">
+    <button id="hamburger" onclick="toggleMenu()" style="background:none;border:none;cursor:pointer;padding:8px;display:flex;flex-direction:column;gap:5px;position:relative;z-index:101;">
       <span style="display:block;width:22px;height:2px;background:#0d1f3c;border-radius:2px;"></span>
       <span style="display:block;width:22px;height:2px;background:#0d1f3c;border-radius:2px;"></span>
       <span style="display:block;width:22px;height:2px;background:#0d1f3c;border-radius:2px;"></span>
     </button>
   </div>
-  <div class="nav-logo">MANO<span>.</span></div>
-  <a href="#registro" class="nav-cta">Quiero sumarme</a>
+  <a href="/" class="nav-logo">MANO<span>.</span></a>
+  <div class="nav-links">
+    <a href="#como-funciona">Cómo funciona</a>
+    <a href="#faq-section">Preguntas frecuentes</a>
+    <a href="/profesionales" class="nav-pro-link">¿Sos profesional?</a>
+    <a href="#registro" class="nav-cta">Quiero contratar</a>
+  </div>
 </nav>
 
 <div id="menu-overlay" onclick="toggleMenu()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:98;"></div>
 <div id="side-menu" style="display:none;position:fixed;top:0;left:0;width:260px;height:100vh;background:#0d1f3c;z-index:99;padding:1.5rem;flex-direction:column;gap:0;">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;">
-    <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:white;letter-spacing:-0.03em;">MANO<span style="color:#2a5bd7;">.</span></span>
+    <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:white;letter-spacing:-0.03em;">MANO<span style="color:#1a56db;">.</span></span>
     <button onclick="toggleMenu()" style="background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.5);font-size:22px;line-height:1;">×</button>
   </div>
-  <a href="#" onclick="toggleMenu()" style="display:block;padding:14px 0;font-size:15px;color:rgba(255,255,255,0.85);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.08);font-family:'Instrument Sans',sans-serif;">Inicio</a>
-  <a href="#como-funciona" onclick="toggleMenu()" style="display:block;padding:14px 0;font-size:15px;color:rgba(255,255,255,0.85);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.08);font-family:'Instrument Sans',sans-serif;">Cómo funciona</a>
-  <a href="#faq-list" onclick="toggleMenu()" style="display:block;padding:14px 0;font-size:15px;color:rgba(255,255,255,0.85);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.08);font-family:'Instrument Sans',sans-serif;">Contacto</a>
-  <a href="/panel.html" style="display:block;padding:14px 0;font-size:15px;color:#2a5bd7;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.08);font-family:'Instrument Sans',sans-serif;font-weight:600;">Ingresar →</a>
+  <a href="#" onclick="toggleMenu()" style="display:block;padding:14px 0;font-size:15px;color:rgba(255,255,255,0.85);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.08);">Inicio</a>
+  <a href="#como-funciona" onclick="toggleMenu()" style="display:block;padding:14px 0;font-size:15px;color:rgba(255,255,255,0.85);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.08);">Cómo funciona</a>
+  <a href="#faq-section" onclick="toggleMenu()" style="display:block;padding:14px 0;font-size:15px;color:rgba(255,255,255,0.85);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.08);">Preguntas frecuentes</a>
+  <a href="/profesionales" style="display:block;padding:14px 0;font-size:15px;color:#1a56db;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.08);font-weight:600;">¿Sos profesional? Sumate →</a>
 </div>
 
 <!-- HERO -->
@@ -744,21 +280,21 @@ footer {
         <div class="hero-tag-dot"></div>
         Llegando a CABA · 2026
       </div>
-      <h1>Conseguí clientes.<br>Sin intermediarios.<br><em>Sin complicaciones.</em></h1>
-      <p class="hero-sub">MANO conecta profesionales verificados con personas que necesitan servicios en el hogar en toda la Ciudad de Buenos Aires. Vos ponés el oficio, nosotros ponemos los clientes.</p>
-      <a href="#registro" class="nav-cta" style="display:inline-block; padding: 14px 28px; font-size: 15px; text-decoration:none;">Anotarme en la lista de espera</a>
+      <h1>El profesional que necesitás,<br><em>cuando lo necesitás.</em></h1>
+      <p class="hero-sub">MANO conecta a vecinos de CABA con profesionales verificados para el hogar. Publicá tu trabajo, recibí presupuestos y pagá seguro — todo desde la app.</p>
+      <a href="#como-funciona" class="hero-btn">Ver cómo funciona</a>
       <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-num">3M+</span>
-          <span class="stat-label">habitantes en CABA</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">0%</span>
-          <span class="stat-label">comisión al lanzar</span>
-        </div>
         <div class="stat">
           <span class="stat-num">48</span>
           <span class="stat-label">barrios cubiertos</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">profesionales verificados</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">0</span>
+          <span class="stat-label">riesgo de impago</span>
         </div>
       </div>
     </div>
@@ -781,7 +317,7 @@ footer {
                 <div class="phone-urgent-label">🚨 ¿Urgencia?</div>
                 <div class="phone-urgent-sub">Encontrá un profesional ahora</div>
               </div>
-              <div style="color:#c0392b; font-size:14px;">→</div>
+              <div style="color:#c0392b;font-size:14px;">→</div>
             </div>
             <div class="phone-cats">Categorías</div>
             <div class="phone-cat-grid">
@@ -809,7 +345,6 @@ footer {
           </div>
         </div>
       </div>
-
       <div class="float-badge">
         <div class="float-badge-icon">✅</div>
         <div>
@@ -817,50 +352,49 @@ footer {
           <div class="float-badge-sub">Liberás los fondos vos</div>
         </div>
       </div>
-
       <div class="float-badge2">
-        <div class="float-badge2-title"><span id="contador">...</span> profesionales anotados</div>
-        <div class="float-badge2-sub">en lista de espera</div>
+        <div class="float-badge2-title">Profesionales verificados</div>
+        <div class="float-badge2-sub">DNI + matrícula comprobada</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BENEFICIOS -->
+<!-- BENEFICIOS CLIENTE -->
 <section class="section">
   <div class="section-inner">
     <div class="section-tag">Por qué MANO</div>
-    <div class="section-title">Todo lo que un profesional necesita</div>
+    <div class="section-title">Todo lo que necesitás para contratar con tranquilidad</div>
     <div class="benefits-grid">
       <div class="benefit">
-        <div class="benefit-icon" style="background:#e8f0fd;">💼</div>
-        <div class="benefit-title">Clientes sin buscarlos</div>
-        <div class="benefit-desc">Recibís solicitudes de personas en tu zona que ya están buscando lo que vos ofrecés. Sin publicidad, sin boca a boca.</div>
+        <div class="benefit-icon" style="background:#e3faf0;">🛡️</div>
+        <div class="benefit-title">Profesionales verificados</div>
+        <div class="benefit-desc">Todos los profesionales pasan por un proceso de verificación de identidad y matrícula antes de aparecer en MANO.</div>
       </div>
       <div class="benefit">
-        <div class="benefit-icon" style="background:#e3faf0;">💸</div>
-        <div class="benefit-title">Cobro garantizado</div>
-        <div class="benefit-desc">El cliente paga antes de que empieces. Los fondos se liberan cuando terminás el trabajo. Cero riesgo de impago.</div>
+        <div class="benefit-icon" style="background:#e8f0fd;">💳</div>
+        <div class="benefit-title">Pago seguro con escrow</div>
+        <div class="benefit-desc">Pagás por anticipado pero los fondos quedan retenidos. Se liberan al profesional solo cuando confirmas que quedaste conforme.</div>
       </div>
       <div class="benefit">
         <div class="benefit-icon" style="background:#fdf0dc;">⭐</div>
-        <div class="benefit-title">Reputación que te abre puertas</div>
-        <div class="benefit-desc">Cada trabajo bien hecho suma a tu perfil. Tu historial y calificaciones te distinguen de la competencia.</div>
+        <div class="benefit-title">Calificaciones reales</div>
+        <div class="benefit-desc">Cada profesional tiene un historial de trabajos y calificaciones de clientes reales. Elegís con información, no con suerte.</div>
       </div>
       <div class="benefit">
-        <div class="benefit-icon" style="background:#fdecea;">🚀</div>
-        <div class="benefit-title">Comisión cero al inicio</div>
-        <div class="benefit-desc">Los primeros profesionales que se sumen van a tener condiciones especiales de lanzamiento. Cuanto antes te anotes, mejor.</div>
+        <div class="benefit-icon" style="background:#fdecea;">🚨</div>
+        <div class="benefit-title">Urgencias al instante</div>
+        <div class="benefit-desc">¿Caño roto a las 11pm? MANO te conecta con profesionales disponibles ahora mismo, sin llamadas ni esperas.</div>
       </div>
       <div class="benefit">
         <div class="benefit-icon" style="background:#e8f0fd;">📍</div>
-        <div class="benefit-title">Trabajás en tu zona</div>
-        <div class="benefit-desc">Elegís en qué barrios de CABA querés trabajar. Solo recibís solicitudes de las zonas que te convengan.</div>
+        <div class="benefit-title">Profesionales en tu barrio</div>
+        <div class="benefit-desc">Filtrás por barrio y servicio. Ves quién trabaja cerca tuyo y cuándo puede venir.</div>
       </div>
       <div class="benefit">
-        <div class="benefit-icon" style="background:#e3faf0;">📱</div>
-        <div class="benefit-title">Todo desde el celular</div>
-        <div class="benefit-desc">Gestionás tus trabajos, chateás con clientes y cobrás todo desde la app, sin papelerío ni llamadas.</div>
+        <div class="benefit-icon" style="background:#e3faf0;">💬</div>
+        <div class="benefit-title">Comunicación directa</div>
+        <div class="benefit-desc">Chateás con el profesional antes de confirmar. Coordinás horarios, aclarás dudas y acordás el precio todo dentro de la app.</div>
       </div>
     </div>
   </div>
@@ -870,12 +404,10 @@ footer {
 <section class="how-section" id="como-funciona">
   <div class="how-inner">
     <div class="how-tag">Simple e intuitivo</div>
-    <div class="how-title">Todo en <em style="color:var(--blue);font-style:normal;">un toque</em></div>
+    <div class="how-title">Todo en <em style="color:var(--blue);font-style:normal;">tres pasos</em></div>
     <p style="font-size:16px;color:rgba(255,255,255,0.6);max-width:500px;line-height:1.7;margin-bottom:3.5rem;">Encontrá el profesional que necesitás, agendá y pagá de forma segura — sin llamadas, sin efectivo, sin vueltas.</p>
-
     <div class="phones-grid">
 
-      <!-- PASO 1 -->
       <div class="phone-col">
         <div class="phone-step-row">
           <div class="phone-step-num">1</div>
@@ -918,7 +450,6 @@ footer {
         </div>
       </div>
 
-      <!-- PASO 2 -->
       <div class="phone-col">
         <div class="phone-step-row">
           <div class="phone-step-num">2</div>
@@ -957,7 +488,6 @@ footer {
         </div>
       </div>
 
-      <!-- PASO 3 -->
       <div class="phone-col">
         <div class="phone-step-row">
           <div class="phone-step-num">3</div>
@@ -1002,145 +532,72 @@ footer {
   </div>
 </section>
 
-<!-- FORMULARIO -->
-<section class="form-section" id="registro">
-  <div class="form-section-inner">
-    <div class="section-tag" style="text-align:center;">Lista de espera</div>
-    <div class="section-title">Anotate y sé de los primeros</div>
-    <p class="form-sub">Estamos armando el equipo inicial de profesionales para el lanzamiento en CABA. Los primeros en sumarse van a tener condiciones especiales.</p>
-
-    <div class="form-card" id="form-card">
-      <div id="form-content">
-        <div class="form-grid">
-          <div class="form-row">
-            <label>Nombre</label>
-            <input type="text" id="nombre" placeholder="Tu nombre" />
-          </div>
-          <div class="form-row">
-            <label>Apellido</label>
-            <input type="text" id="apellido" placeholder="Tu apellido" />
-          </div>
+<!-- CTA PROFESIONALES -->
+<section class="pro-cta-section">
+  <div class="pro-cta-inner">
+    <div>
+      <div class="pro-cta-tag">Para profesionales</div>
+      <div class="pro-cta-title">¿Sos profesional?<br><em>Conseguí clientes sin buscarlos.</em></div>
+      <p class="pro-cta-sub">Sumate a MANO y recibí solicitudes de personas en tu zona que ya están buscando lo que vos ofrecés. Cobrá seguro, acumulá reseñas y hacé crecer tu reputación.</p>
+      <a href="/profesionales" class="pro-cta-btn">Quiero sumarme a MANO →</a>
+    </div>
+    <div class="pro-cta-points">
+      <div class="pro-cta-point">
+        <div class="pro-cta-point-icon">💸</div>
+        <div>
+          <div class="pro-cta-point-title">Cobro garantizado</div>
+          <div class="pro-cta-point-desc">El cliente paga antes de que empieces. Cero riesgo de impago.</div>
         </div>
-        <div class="form-row">
-          <label>WhatsApp</label>
-          <input type="tel" id="telefono" placeholder="11 1234-5678" />
-        </div>
-        <div class="form-row">
-          <label>Email</label>
-          <input type="email" id="email" placeholder="tucorreo@gmail.com" />
-        </div>
-        <div class="form-grid">
-          <div class="form-row">
-            <label>Oficio principal</label>
-            <select id="oficio">
-              <option value="" disabled selected>Seleccioná</option>
-              <option>Plomería</option>
-              <option>Electricidad</option>
-              <option>Gasista</option>
-              <option>Pintura</option>
-              <option>Cerrajería</option>
-              <option>Limpieza</option>
-              <option>Albañilería</option>
-              <option>Mudanzas</option>
-              <option>Técnico electrónico</option>
-              <option>Carpintería</option>
-              <option>Otro</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label>Barrio donde trabajás</label>
-            <div style="position:relative;">
-              <input type="text" id="barrio-input" placeholder="Escribí o seleccioná tu barrio..." autocomplete="off" oninput="filtrarBarrios()" onfocus="mostrarBarrios()" onblur="setTimeout(ocultarBarrios,200)" style="width:100%;" />
-              <input type="hidden" id="barrio" />
-              <div id="barrios-lista" style="display:none;position:absolute;top:100%;left:0;right:0;background:white;border:1.5px solid #e2ddd6;border-top:none;border-radius:0 0 10px 10px;max-height:200px;overflow-y:auto;z-index:50;"></div>
-            </div>
-          </div>
-        </div>
-        <div class="form-row">
-          <label>Años de experiencia</label>
-          <select id="experiencia">
-            <option value="" disabled selected>Seleccioná</option>
-            <option>Menos de 1 año</option>
-            <option>1-3 años</option>
-            <option>3-5 años</option>
-            <option>5-10 años</option>
-            <option>Más de 10 años</option>
-          </select>
-        </div>
-        <button class="submit-btn" onclick="enviarFormulario()">Quiero sumarme a MANO →</button>
-        <p class="form-note">Tus datos están seguros. Solo te contactamos para avisarte del lanzamiento.</p>
       </div>
-
-      <div class="success-state" id="success">
-        <div class="success-icon">✅</div>
-        <div class="success-title">¡Estás anotado!</div>
-        <p class="success-sub">Te vamos a avisar cuando MANO esté lista para lanzar en CABA. Gracias por ser parte desde el principio.</p>
+      <div class="pro-cta-point">
+        <div class="pro-cta-point-icon">📍</div>
+        <div>
+          <div class="pro-cta-point-title">Trabajás en tu zona</div>
+          <div class="pro-cta-point-desc">Solo recibís solicitudes de los barrios que vos elegís.</div>
+        </div>
+      </div>
+      <div class="pro-cta-point">
+        <div class="pro-cta-point-icon">🚀</div>
+        <div>
+          <div class="pro-cta-point-title">Comisión cero al inicio</div>
+          <div class="pro-cta-point-desc">Los primeros en sumarse tienen condiciones especiales de lanzamiento.</div>
+        </div>
+      </div>
+      <div class="pro-cta-point">
+        <div class="pro-cta-point-icon">⭐</div>
+        <div>
+          <div class="pro-cta-point-title">Reputación que crece</div>
+          <div class="pro-cta-point-desc">Cada trabajo bien hecho suma a tu perfil y te da más visibilidad.</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section style="padding: 5rem 2rem; background: var(--white);">
-  <div style="max-width: 700px; margin: 0 auto;">
+<!-- FAQ -->
+<section class="faq-section" id="faq-section">
+  <div class="faq-inner">
     <div class="section-tag" style="text-align:center;">Preguntas frecuentes</div>
-    <div class="section-title" style="text-align:center; margin: 0 auto 2.5rem;">Todo lo que necesitás saber</div>
+    <div class="section-title" style="text-align:center;max-width:100%;margin-bottom:2.5rem;">Todo lo que necesitás saber</div>
     <div id="faq-list"></div>
   </div>
 </section>
 
 <footer>
-  <div class="footer-logo">MANO<span>.</span></div>
-  <div class="footer-sub">Tu solución, a un toque · CABA, Argentina · 2026</div>
-  <div style="display:flex; align-items:center; justify-content:center; gap:14px; margin-top:1.25rem;">
-    <a href="#" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.18)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="white"/></svg>
-    </a>
-    <a href="#" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.18)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.05a8.16 8.16 0 0 0 4.78 1.52V7.12a4.85 4.85 0 0 1-1.01-.43z"/></svg>
-    </a>
-    <a href="#" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.18)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-    </a>
-    <a href="#" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.18)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="white" stroke-width="1.8"/><polyline points="22,6 12,13 2,6" stroke="white" stroke-width="1.8"/></svg>
-    </a>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">MANO<span>.</span></div>
+      <div class="footer-sub">Tu solución, a un toque · CABA, Argentina · 2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#faq-section">FAQ</a>
+      <a href="/profesionales">Para profesionales</a>
+    </div>
   </div>
 </footer>
 
 <script>
-function enviarFormulario() {
-  const nombre = document.getElementById('nombre').value.trim();
-  const apellido = document.getElementById('apellido').value.trim();
-  const telefono = document.getElementById('telefono').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const oficio = document.getElementById('oficio').value;
-  const barrio = document.getElementById('barrio').value;
-  const experiencia = document.getElementById('experiencia').value;
-
-  if (!nombre || !apellido || !telefono || !email || !oficio || !barrio || !experiencia) {
-    alert('Por favor completá todos los campos antes de continuar.');
-    return;
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    alert('Por favor ingresá un email válido.');
-    return;
-  }
-
-  const btn = document.querySelector('.submit-btn');
-  btn.textContent = 'Enviando...';
-  btn.disabled = true;
-
-  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzN9Rn3V6v3ci3sYMczc6mrKrzDsb4VccPVPhq8hiVh1Nl7P5_EoQcoNdxQuGgfFaGHrQ/exec';
-  const fecha = new Date().toLocaleString('es-AR');
-  const params = new URLSearchParams({ nombre, apellido, telefono, email, oficio, barrio, experiencia, fecha });
-
-  fetch('/.netlify/functions/registro?' + params.toString())
-    .then(() => mostrarExito())
-    .catch(() => mostrarExito());
-}
-
 function toggleMenu() {
   const menu = document.getElementById('side-menu');
   const overlay = document.getElementById('menu-overlay');
@@ -1149,81 +606,26 @@ function toggleMenu() {
   overlay.style.display = open ? 'none' : 'block';
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('hamburger').addEventListener('click', toggleMenu);
-  document.getElementById('menu-overlay').addEventListener('click', toggleMenu);
-});
-
-const TODOS_BARRIOS = ["Agronomía","Almagro","Balvanera","Barracas","Belgrano","Boedo","Caballito","Chacarita","Coghlan","Colegiales","Constitución","Flores","Floresta","La Boca","La Paternal","Liniers","Mataderos","Monte Castro","Montserrat","Nueva Pompeya","Núñez","Palermo","Parque Avellaneda","Parque Chacabuco","Parque Chas","Parque Patricios","Paternal","Puerto Madero","Recoleta","Retiro","Saavedra","San Cristóbal","San Nicolás","San Telmo","Vélez Sársfield","Versalles","Villa Crespo","Villa del Parque","Villa Devoto","Villa Gral. Mitre","Villa Lugano","Villa Luro","Villa Ortúzar","Villa Pueyrredón","Villa Real","Villa Riachuelo","Villa Santa Rita","Villa Urquiza","Toda CABA"];
-
-function filtrarBarrios() {
-  const q = document.getElementById('barrio-input').value.toLowerCase();
-  const lista = document.getElementById('barrios-lista');
-  const filtrados = TODOS_BARRIOS.filter(b => b.toLowerCase().includes(q));
-  lista.style.display = filtrados.length ? 'block' : 'none';
-  lista.innerHTML = filtrados.map(b => `
-    <div onclick="seleccionarBarrio('${b}')" style="padding:10px 14px;font-size:13px;cursor:pointer;color:#0d1f3c;font-family:'Instrument Sans',sans-serif;" onmouseover="this.style.background='#f5f3ef'" onmouseout="this.style.background='white'">${b}</div>
-  `).join('');
-}
-
-function mostrarBarrios() {
-  filtrarBarrios();
-}
-
-function ocultarBarrios() {
-  document.getElementById('barrios-lista').style.display = 'none';
-}
-
-function seleccionarBarrio(b) {
-  document.getElementById('barrio-input').value = b;
-  document.getElementById('barrio').value = b;
-  document.getElementById('barrios-lista').style.display = 'none';
-}
-
-function mostrarExito() {
-  document.getElementById('form-content').style.display = 'none';
-  document.getElementById('success').style.display = 'block';
-  actualizarContador();
-}
-
-const COUNTER_URL = 'https://script.google.com/macros/s/AKfycbzN9Rn3V6v3ci3sYMczc6mrKrzDsb4VccPVPhq8hiVh1Nl7P5_EoQcoNdxQuGgfFaGHrQ/exec';
-
-function actualizarContador() {
-  const url = 'https://script.google.com/macros/s/AKfycbzN9Rn3V6v3ci3sYMczc6mrKrzDsb4VccPVPhq8hiVh1Nl7P5_EoQcoNdxQuGgfFaGHrQ/exec?action=count';
-  const img = new Image();
-  img.src = url + '&cb=' + Date.now();
-  fetch(url)
-    .then(r => r.json())
-    .then(data => {
-      document.querySelectorAll('#contador').forEach(el => el.textContent = '+' + data.count);
-    })
-    .catch(() => {
-      document.querySelectorAll('#contador').forEach(el => el.textContent = '+1');
-    });
-}
-
 window.addEventListener('load', () => {
-  actualizarContador();
-
   const faqs = [
-    { q: "¿Cuánto cobra MANO por cada trabajo?", a: "MANO cobra una pequeña comisión al profesional sobre el monto del servicio. Al cliente no se le cobra nada adicional. Los primeros profesionales en sumarse van a tener condiciones especiales de lanzamiento." },
-    { q: "¿Cómo funciona el cobro?", a: "El cliente paga por anticipado a través de la app. El dinero queda retenido de forma segura hasta que el trabajo finaliza. Cuando el cliente confirma que está conforme, los fondos se liberan automáticamente a tu cuenta." },
-    { q: "¿Necesito ser monotributista?", a: "No es un requisito para anotarte en la lista de espera. Al momento del lanzamiento te vamos a explicar las opciones disponibles según tu situación." },
-    { q: "¿En qué zonas va a funcionar MANO?", a: "El lanzamiento inicial cubre toda la Ciudad Autónoma de Buenos Aires (CABA), los 48 barrios. Próximamente expandimos al GBA." },
-    { q: "¿Cómo me verifican como profesional?", a: "El proceso de verificación incluye validación de identidad con DNI y una foto. Para oficios que requieren matrícula (gasistas, electricistas), también pedimos el número de matrícula." },
-    { q: "¿Cuándo lanza la app?", a: "Estamos en etapa de desarrollo. Los profesionales anotados en la lista de espera van a ser los primeros en recibir acceso y en conocer la fecha de lanzamiento." },
+    { q: "¿Cómo funciona el pago seguro?", a: "Cuando aceptás un presupuesto, el dinero se retiene en MANO a través de Mercado Pago. El profesional no recibe nada hasta que vos confirmás que el trabajo quedó bien. Si hay algún problema, MANO interviene." },
+    { q: "¿Cómo sé que el profesional es confiable?", a: "Todos los profesionales de MANO pasan por verificación de identidad con DNI. Los que requieren matrícula (gasistas, electricistas) también la acreditan. Además podés ver sus calificaciones y trabajos anteriores." },
+    { q: "¿Cuánto cuesta usar MANO?", a: "Para los clientes, usar MANO es gratuito. No se cobra ninguna comisión adicional sobre el precio del servicio." },
+    { q: "¿Qué pasa si no quedé conforme con el trabajo?", a: "Tenés la posibilidad de no liberar los fondos y abrir una disputa. MANO evalúa el caso y en muchas situaciones reenvía otro profesional sin costo adicional." },
+    { q: "¿En qué zonas funciona MANO?", a: "El lanzamiento inicial cubre los 48 barrios de la Ciudad Autónoma de Buenos Aires (CABA). Próximamente expandimos al GBA." },
+    { q: "¿Cuándo está disponible la app?", a: "Estamos en etapa de desarrollo con lanzamiento previsto para 2026. Podés seguir las novedades y ser de los primeros en enterarte en la sección de profesionales." },
   ];
 
   const faqList = document.getElementById('faq-list');
   faqs.forEach((faq, i) => {
     const item = document.createElement('div');
-    item.style.cssText = 'border-bottom: 1px solid #e2ddd6; padding: 1.25rem 0; cursor: pointer;';
+    item.style.cssText = 'border-bottom:1px solid #e2ddd6;padding:1.25rem 0;cursor:pointer;';
     item.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem;" onclick="toggleFaq(${i})">
-        <span style="font-size:15px; font-weight:500; color:#0d1f3c;">${faq.q}</span>
-        <span id="faq-icon-${i}" style="font-size:18px; color:#1a56db; flex-shrink:0; transition:transform 0.2s;">+</span>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;" onclick="toggleFaq(${i})">
+        <span style="font-size:15px;font-weight:500;color:#0d1f3c;">${faq.q}</span>
+        <span id="faq-icon-${i}" style="font-size:18px;color:#1a56db;flex-shrink:0;transition:transform 0.2s;">+</span>
       </div>
-      <div id="faq-ans-${i}" style="display:none; margin-top:10px; font-size:14px; color:#4a5568; line-height:1.7;">${faq.a}</div>
+      <div id="faq-ans-${i}" style="display:none;margin-top:10px;font-size:14px;color:#4a5568;line-height:1.7;">${faq.a}</div>
     `;
     faqList.appendChild(item);
   });
@@ -1237,6 +639,5 @@ function toggleFaq(i) {
   icon.textContent = open ? '+' : '−';
 }
 </script>
-
 </body>
 </html>
